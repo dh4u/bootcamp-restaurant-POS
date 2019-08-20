@@ -1,0 +1,165 @@
+<html lang="en">
+    
+    <head>
+        <title>Task 13 - Compulsory Task 2 - Food, Drink, and Tip Calculator</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style type="text/css">
+            .currency{
+                text-align: right;
+            }
+            
+            body{
+                margin: 20px;
+            }
+        </style>
+        <script type="text/javascript" src="cafe.js"></script>
+    </head>
+    
+    <body onload="initialize();">
+        
+        <div class="col"></div>
+        <div class="col">
+            <div class="row">
+                <div class="card">
+                    <div class="card-header">City Cafe</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Table: 1<br />Server: Pierre</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Seated at: <script type="text/javascript" >d = new Date(); document.write(d.toDateString());
+                        document.write(" ");
+                        document.write(d.toLocaleTimeString());</script></h6>
+                        <p class="card-text">Please choose an option below</p>
+                        
+                        <button type="button" class="btn btn-primary" onclick="newCheck();">
+                            Start New Table
+                        </button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#drinksModal">
+                            Order Drinks
+                        </button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#foodModal">
+                            Order Food
+                        </button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#gratuityModal">
+                            Add gratuity
+                        </button>
+                        &nbsp;&nbsp;
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#totalModal">
+                            Display total
+                        </button>
+                        <br />
+                        <br />
+                        <div class="container" id="runningTotal"></div>
+                    </div>
+                    <!--<div class="card-footer">
+                        <a href="#" class="card-link">Add Food</a>
+                        <a href="#" class="card-link">Add Drink</a>
+                        <a href="#" class="card-link">Add Tip</a>
+                        <a href="#" class="card-link">Close Check</a>
+                    </div>-->
+                    
+                    <div class="container">
+                        <div class="modal" tabindex="-1" role="dialog" id="drinksModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Drinks</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="drinksModalBody"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+                    <div class="container">
+                        <div class="modal" tabindex="-1" role="dialog" id="foodModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Food</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="foodModalBody"></div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="modal" tabindex="-1" role="dialog" id="gratuityModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Gratuity</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="gratuityModalBody">
+                                        <form name="tipForm" id="gratuityForm">
+                                            <div class="form-group">
+                                                <label for="gratuity">Gratuity</label>
+                                                $<input type="text" class="form-control currency" id="gratuity" onchange="updateGrandTotal();" size="5">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="modal" tabindex="-1" role="dialog" id="totalModal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Bill Total</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body" id="totalModalBody">
+                                        <form name="tipForm" id="totalForm">
+                                            <div class="form-group">
+                                                <label for="grandTotal"></label>
+                                                $<input type="text" class="form-control currency" id="grandTotal" size="5">
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </body>
+
+</html>
