@@ -2,7 +2,7 @@
 
 ![](Cafe.png)
 
-This project was for the Full Stack Developer bootcamp I did.
+This project was for the Full Stack Developer bootcamp I did and was for a lesson on .
 
 ## Assignment
 > Create a basic html file.
